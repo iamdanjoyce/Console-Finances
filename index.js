@@ -86,19 +86,24 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
-
+// Calculate the net total by adding up all the profits/losses 
 var totalMonths = finances.length;
 var netTotal = finances.reduce((total, record) => total + record[1], 0);
 
+// Calculate the changes in profits/losses by subtracting the previous month's profit/loss from the current month
 var changesInProfits = finances.slice(1).map((record, index) => record[1] - finances[index][1]);
 
+// Calculate the average change in profits/losses over the entire period
 var averageChange = changesInProfits.reduce((total, change) => total + change, 0) / (totalMonths - 1);
 
+// Find the greatest increase and decrease in profits/losses and their respective months
 var maxIncrease = Math.max(...changesInProfits);
 var maxDecrease = Math.min(...changesInProfits);
 
 var maxIncreaseMonth = finances[changesInProfits.indexOf(maxIncrease) + 1][0];
 var maxDecreaseMonth = finances[changesInProfits.indexOf(maxDecrease) + 1][0];
+
+// Output the financial analysis to the console
 
 console.log("Financial Analysis");
 console.log("----------------------------");
